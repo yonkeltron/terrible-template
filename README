@@ -11,11 +11,14 @@ multiple template variables and interactive value prompting,
 terrible-template should help you to define templates and insert them
 easily as part of your workflow.
 
-This was inspired by things such as
-[tempo mode](http://www.emacswiki.org/emacs/TempoMode) and
-[skeleton-mode](http://www.emacswiki.org/emacs/SkeletonMode) but with
-a simpler interface and the ability to easily use multiple template
-variables.
+This was inspired by things such as:
+
+
+* Templ Mode http://www.emacswiki.org/emacs/TempoMode
+* Skeleton Mode http://www.emacswiki.org/emacs/SkeletonMode
+
+but with a simpler interface and the ability to easily use multiple
+template variables.
 
 Example
 =======
