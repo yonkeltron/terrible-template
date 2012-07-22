@@ -1,3 +1,29 @@
+;;; terrible-template.el --- Templates that don't suck, just terrible
+
+;; Copyright (C) 2012 Jonathan E. Magen (yonkeltron)
+
+;; Author: Jonathan E. Magen <yonkeltron@gmail.com>
+;; Maintainer: Jonathan E. Magen <yonkeltron@gmail.com>
+;; Created: 2012-07-22
+;; Keywords: lisp, template
+
+;; This file is NOT part of GNU Emacs.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Code:
+
 (defvar *terrible-template-global-template-list* (make-hash-table :test 'equal))
 
 (defconst terrible-template-config
@@ -67,13 +93,15 @@
           :initial-value (copy-sequence template-string)))
 
 (defun terrible-template-insert (template-name)
-  (interactive "sTemplate Name: ")
+  (interactive
+   (list (completing-read "Template name: " (terrible-template-get-template-names))))
   (terrible-template-log (concat "Inserting template: " (prin1-to-string template-name t)))
   (let ((template-object (gethash template-name *terrible-template-global-template-list*)))
     (insert (terrible-template-apply-template
              (plist-get template-object :template-string)
              (terrible-template-prompt-for-variables
-              (plist-get template-object :template-variables))))))
+              (plist-get template-object :template-variables)))))
+  (terrible-template-log (concat "Finished insertion of template: " (prin1-to-string template-name t))))
 
 (defun terrible-template-prompt-for-variables (template-variables)
   "Prompt user for variables values"
@@ -81,6 +109,13 @@
   (mapcar (lambda (variable)
             (list variable (read-string (concat variable ": "))))
           template-variables))
+
+(defun terrible-template-get-template-names ()
+  (let ((names nil))
+    (maphash (lambda (key value)
+               (push key names))
+             *terrible-template-global-template-list*)
+    names))
 
 (defmacro defterrible (template-name &rest template-body)
   (let ((contents nil)
@@ -96,3 +131,5 @@
     `(terrible-template-store-template ,template-name (list ',contents ',tags))))
 
 (provide 'terrible-template)
+
+;;; terrible-template.el ends here
