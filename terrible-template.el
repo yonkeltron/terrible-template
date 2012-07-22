@@ -5,6 +5,7 @@
 ;; Author: Jonathan E. Magen <yonkeltron@gmail.com>
 ;; Maintainer: Jonathan E. Magen <yonkeltron@gmail.com>
 ;; Created: 2012-07-22
+;; Version: 20120722001
 ;; Keywords: lisp, template
 
 ;; This file is NOT part of GNU Emacs.
@@ -86,6 +87,7 @@
                             (cadr key-value-pair)
                             template-string))
 
+;;;###autoload
 (defun terrible-template-apply-template (template-string &rest key-value-pairs)
   "Apply a terrible template by interpolating all variables according to provided values"
   (terrible-template-log (concat "Key value pairs: " (prin1-to-string key-value-pairs t)))
@@ -102,6 +104,7 @@
         (terrible-template-error "Wrong number of key-value pairs provided for template")
       (terrible-template-apply-template template-string key-value-pairs))))
 
+;;;###autoload
 (defun terrible-template-insert (template-name)
   (interactive
    (list (completing-read "Template name: " (terrible-template-get-template-names))))
@@ -127,6 +130,7 @@
              *terrible-template-global-template-list*)
     names))
 
+;;;###autoload
 (defmacro defterrible (template-name &rest template-body)
   (let ((contents nil)
         (tags nil))
