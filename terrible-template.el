@@ -93,7 +93,7 @@
           (car key-value-pairs)
           :initial-value (copy-sequence template-string)))
 
-(defun terrible-template-programmatic-insert (template-name &rest key-value-pairs)
+(defun terrible-template-programmatic-apply (template-name &rest key-value-pairs)
   "Programmatically apply a terrible template"
   (let ((template-string (plist-get (gethash template-name *terrible-template-global-template-list*) :template-string))
         (template-variables (plist-get (gethash template-name *terrible-template-global-template-list*) :template-variables)))

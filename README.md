@@ -39,9 +39,12 @@ Non-interactive example
 -----------------------
 
 You can still leverage terrible-template non-interactively with the
-`terrible-template-programmatic-insert` function like so:
+`terrible-template-programmatic-apply` function like so:
 
-    (terrible-template-programmatic-insert "my-template-name" '("key1" "val1") '("key1" "val1"))
+    (terrible-template-programmatic-apply "my-template-name" '("key1" "val1") '("key1" "val1"))
+
+This will return a string containing the interpolated template which
+you may then use for whatever you desire.
 
 Credits
 =======
