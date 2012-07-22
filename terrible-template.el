@@ -5,7 +5,7 @@
 ;; Author: Jonathan E. Magen <yonkeltron@gmail.com>
 ;; Maintainer: Jonathan E. Magen <yonkeltron@gmail.com>
 ;; Created: 2012-07-22
-;; Version: 20120722001
+;; Version: 20120722002
 ;; Keywords: lisp, template
 
 ;; This file is NOT part of GNU Emacs.
@@ -73,7 +73,7 @@
 (defun terrible-template-compile-template (structure)
   "Transform macro-parsed structure into a safe-to-serialize  "
   (list :template-string (apply 'concat (reverse (car structure)))
-        :template-variables (cadr structure)))
+        :template-variables (reverse (cadr structure))))
 
 (defun terrible-template-store-template (template-name template-structure)
   "Store template object in global template store"
