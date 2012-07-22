@@ -87,10 +87,20 @@
                             template-string))
 
 (defun terrible-template-apply-template (template-string &rest key-value-pairs)
+  "Apply a terrible template by interpolating all variables according to provided values"
   (terrible-template-log (concat "Key value pairs: " (prin1-to-string key-value-pairs t)))
   (reduce 'terrible-template-substitute
           (car key-value-pairs)
           :initial-value (copy-sequence template-string)))
+
+(defun terrible-template-programmatic-insert (template-name &rest key-value-pairs)
+  "Programmatically apply a terrible template"
+  (let ((template-string (plist-get (gethash template-name *terrible-template-global-template-list*) :template-string))
+        (template-variables (plist-get (gethash template-name *terrible-template-global-template-list*) :template-variables)))
+    (if (not (equal (length key-value-pairs)
+                    (length template-variables)))
+        (terrible-template-error "Wrong number of key-value pairs provided for template")
+      (terrible-template-apply-template template-string key-value-pairs))))
 
 (defun terrible-template-insert (template-name)
   (interactive

@@ -35,6 +35,14 @@ terrible-template-insert <RET> my-template-name` which will prompt you
 for the variable values, interpolate the template and insert it at
 point.
 
+Non-interactive example
+-----------------------
+
+You can still leverage terrible-template non-interactively with the
+`terrible-template-programmatic-insert` function like so:
+
+    (terrible-template-programmatic-insert "my-template-name" '("key1" "val1") '("key1" "val1"))
+
 Credits
 =======
 
