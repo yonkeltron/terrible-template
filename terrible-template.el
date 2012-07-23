@@ -132,6 +132,7 @@
 
 ;;;###autoload
 (defmacro defterrible (template-name &rest template-body)
+  "Allows you to define a terrible template with the name TEMPLATE-NAME and fill it with strings and var statements"
   (let ((contents nil)
         (tags nil))
     (mapcar (lambda (obj)
